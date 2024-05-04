@@ -35,28 +35,5 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/test', function() {
-    // dd(Auth::user());
-    $plan = Plan::create([
-        'name'              =>  'Last Plan',
-        'short_description' =>  'A terrible plan',
-        'price'             =>  2990
-    ]);
-
-    $client = Auth::user()->client()->create([
-        'document'  =>  '02907039130',
-        'birthdate' =>  '1992-07-20'
-    ]);
-
-    // $client = Client::create([
-    //     'document'  =>  '02907039130',
-    //     'birthdate' =>  '1992-07-20',
-    //     'user_id'   =>  Auth::user()->id
-    // ]);
-
-    $client->signatures()->create([
-        'plan_id'   =>  $plan->id,
-        'status'    =>  SignatureStatus::ACTIVATED
-    ]);
-
-    return 'hey_client';
+    return view('test', ['comida'=>'lasanha']);
 });
