@@ -7,9 +7,23 @@
   <title>Document</title>
 </head>
 <body>
-  @php
-    $suco = 'suco de laranja'
-  @endphp
-  <h2>Hey HO {{ $comida }} e {{ $suco }}</h2>
+  <ol>
+    @php
+      $user = Auth::user();
+      $client = App\Models\Client::where('user_id',$user->id)->first();
+      $signature = $client->signatures->first();
+      $plan = $signature->plan;
+      $status = $signature->status;
+    @endphp
+    <li>Nome: {{ $user->name }}</li>
+    <li>Documento: {{ $client->document }}</li>
+    <li>Plano: {{ $plan->name.' - '.$plan->short_description }}</li>
+    <li>Status da assinatura: {{ $status->name }}</li>
+    <hr>
+    <li>Nome: {{ auth()->user()->name }}</li>
+    <li>Documento: {{ auth()->user()->client->document }}</li>
+    <li>Plano: {{ auth()->user()->client->signatures->first()->plan->name.' - '.auth()->user()->client->signatures->first()->plan->short_description }}</li>
+    <li>Status da assinatura: {{ auth()->user()->client->signatures->first()->status->name }}</li>
+  </ol>
 </body>
 </html>
