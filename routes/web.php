@@ -1,10 +1,7 @@
 <?php
 
-use App\Enums\SignatureStatus;
 use App\Http\Controllers\ProfileController;
-use App\Models\Client;
-use App\Models\Plan;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SignatureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +31,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/test', function() {
-    return view('test', ['comida'=>'lasanha']);
-});
+Route::get('/test', [SignatureController::class, 'index']);
