@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\EmployeeAddressController;
-use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignatureController;
+use App\Http\Middleware\TrustProxies;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,16 +36,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/test', [SignatureController::class, 'index']);
 
-Route::resource('funcionarios', EmployeeController::class)
-    ->parameter('funcionarios','employee_id')
-    ->except('destroy')
-    ->middleware('checkToken:employees-token')
-    ->middleware('checkRole:common');
-
-Route::resource('funcionarios.enderecos', EmployeeAddressController::class)
-    ->parameters([
-        'funcionarios'  =>  'employee_id',
-        'enderecos'     =>  'address_id'
-    ])
-    ->only(['index', 'show'])
-    ->middleware(['checkToken:employees.addresses-token', 'checkRole:admin']);
+Route::resource('planos', PlanController::class)
+    ->withoutMiddleware([
+        TrustProxies::class,
+        VerifyCsrfToken::class,
+    ]);

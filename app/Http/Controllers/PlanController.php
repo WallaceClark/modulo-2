@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class EmployeeAddressController extends Controller
+class PlanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return 'list of employees addresses';
+        return 'List of plans!';
     }
 
     /**
@@ -19,7 +19,7 @@ class EmployeeAddressController extends Controller
      */
     public function create()
     {
-        //
+        return 'Create plan!';
     }
 
     /**
@@ -27,7 +27,7 @@ class EmployeeAddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'Stored plan!';
     }
 
     /**
