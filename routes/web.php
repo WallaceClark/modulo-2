@@ -37,11 +37,14 @@ Route::get('/test', [SignatureController::class, 'index']);
 
 Route::resource('funcionarios', EmployeeController::class)
     ->parameter('funcionarios','employee_id')
-    ->except('destroy');
+    ->except('destroy')
+    ->middleware('checkToken:employees-token')
+    ->middleware('checkRole:common');
 
 Route::resource('funcionarios.enderecos', EmployeeAddressController::class)
     ->parameters([
         'funcionarios'  =>  'employee_id',
         'enderecos'     =>  'address_id'
     ])
-    ->only(['index', 'show']);
+    ->only(['index', 'show'])
+    ->middleware(['checkToken:employees.addresses-token', 'checkRole:admin']);

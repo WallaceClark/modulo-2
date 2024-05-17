@@ -11,7 +11,7 @@ class EmployeeAddressController extends Controller
      */
     public function index()
     {
-        //
+        return 'list of employees addresses';
     }
 
     /**
