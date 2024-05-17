@@ -35,5 +35,13 @@ require __DIR__.'/auth.php';
 
 Route::get('/test', [SignatureController::class, 'index']);
 
-Route::resource('employees', EmployeeController::class);
-Route::resource('employees.addressess', EmployeeAddressController::class);
+Route::resource('funcionarios', EmployeeController::class)
+    ->parameter('funcionarios','employee_id')
+    ->except('destroy');
+
+Route::resource('funcionarios.enderecos', EmployeeAddressController::class)
+    ->parameters([
+        'funcionarios'  =>  'employee_id',
+        'enderecos'     =>  'address_id'
+    ])
+    ->only(['index', 'show']);
