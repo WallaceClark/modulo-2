@@ -12,7 +12,7 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return Plan::all();;
+        return Plan::all();
     }
 
     /**
@@ -28,7 +28,7 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        return 'Stored plan!';
+        return Plan::create($request->all());
     }
 
     /**
