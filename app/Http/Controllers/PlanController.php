@@ -13,6 +13,10 @@ class PlanController extends Controller
      */
     public function index()
     {
+        // return session()->all();
+        session([
+            'custom-key'    =>  'default-value'
+        ]);
         return Plan::all();
     }
 
@@ -21,7 +25,8 @@ class PlanController extends Controller
      */
     public function create()
     {
-        return view('plan');
+        return session()->all();
+        // return view('plan');
     }
 
     /**
@@ -37,6 +42,7 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
+        session()->forget('custom-key');
         return $plan;
     }
 
@@ -45,7 +51,7 @@ class PlanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return session()->get('custom-key');
     }
 
     /**
