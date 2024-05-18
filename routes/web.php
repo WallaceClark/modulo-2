@@ -37,6 +37,8 @@ require __DIR__.'/auth.php';
 Route::get('/test', [SignatureController::class, 'index']);
 
 Route::resource('planos', PlanController::class)
+    ->parameter('planos', 'plan')
+    ->missing(fn() => redirect()->route('planos.index'))
     ->withoutMiddleware([
         TrustProxies::class,
         VerifyCsrfToken::class,
